@@ -12,7 +12,7 @@ public class CriteriosConsultaDTO implements Serializable {
 
     private static final long serialVersionUID = -2729040982583930617L;
 
-    private Map<String, Object> dados = new HashMap<String, Object>();
+    private Map<String, Object> dados = new HashMap<>();
 
     /**
      * @return the dados
