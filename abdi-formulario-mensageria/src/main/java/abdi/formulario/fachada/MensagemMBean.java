@@ -1,5 +1,6 @@
 package abdi.formulario.fachada;
 
+import abdi.formulario.cdi.Logged;
 import abdi.formulario.dao.AuditoriaDao;
 import abdi.formulario.mensageria.vo.MensagemAuditoria;
 import java.util.List;
@@ -19,6 +20,7 @@ public class MensagemMBean extends AplicacaoMBean
     @Inject
     private AuditoriaDao dao;
 
+    @Logged
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<MensagemAuditoria> listar() {

@@ -16,5 +16,13 @@ public class EscolaServiceLocator extends AplicacaoServiceLocator {
                 .getJndi(Jndi.ALUNOMBEAN.getJndiName())
         );
     }
+    
+     public IAplicacaoMBean localizarAuditoriaBean() throws LocalizarObjetoException {
+        return (IAplicacaoMBean) localizar(
+                LocatorResourceBundle
+                .get()
+                .getJndi(Jndi.AUDITORIAMBEAN.getJndiName())
+        );
+    }
 
 }

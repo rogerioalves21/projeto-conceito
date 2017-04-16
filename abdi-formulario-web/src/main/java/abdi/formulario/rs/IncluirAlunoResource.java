@@ -25,7 +25,7 @@ import javax.ws.rs.core.MediaType;
 public class IncluirAlunoResource {
 
     @Inject
-    AlunoDelegate delegate;
+    private AlunoDelegate delegate;
 
     @POST
     @Logged

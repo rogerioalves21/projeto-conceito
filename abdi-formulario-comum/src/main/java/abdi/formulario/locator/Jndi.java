@@ -6,7 +6,8 @@ package abdi.formulario.locator;
  */
 public enum Jndi {
 
-    ALUNOMBEAN("alunombean");
+    ALUNOMBEAN("alunombean"),
+    AUDITORIAMBEAN("auditoriambean");
 
     private final String jndi;
 
