@@ -32,6 +32,7 @@ public class AuditoriaConsumer implements MessageListener {
         try {
             MensagemAuditoria login = (MensagemAuditoria) ((ObjectMessage) message).getObject();
             dao.incluir(login);
+            dao.listar();
         } catch (JMSException ex) {
             Logger.getLogger(AuditoriaConsumer.class.getName()).log(Level.SEVERE, null, ex);
         }

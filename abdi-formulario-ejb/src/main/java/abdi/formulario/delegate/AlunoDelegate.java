@@ -20,12 +20,12 @@ public class AlunoDelegate
         implements IAplicacaoDelegate<IAlunoMBean> {
 
     @Inject
-    EscolaServiceLocator locator;
+    private EscolaServiceLocator locator;
 
     public void incluir(Aluno aluno) throws AplicacaoException {
         try {
-            locator
-                    .localizarAlunoBean()
+            IAlunoMBean.class.cast(locator
+                    .localizarAlunoBean())
                     .incluir(aluno);
         } catch (LocalizarObjetoException ex) {
             Logger.getLogger(AlunoDelegate.class.getName()).log(Level.SEVERE, null, ex);
@@ -35,8 +35,8 @@ public class AlunoDelegate
 
     public List<Aluno> listar() {
         try {
-            return locator
-                    .localizarAlunoBean()
+            return IAlunoMBean.class.cast(locator
+                    .localizarAlunoBean())
                     .listar();
         } catch (LocalizarObjetoException ex) {
             Logger.getLogger(AlunoDelegate.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,8 +46,8 @@ public class AlunoDelegate
 
     public List<Aluno> procurar(CriteriosConsultaDTO criterios) {
         try {
-            return locator
-                    .localizarAlunoBean()
+            return IAlunoMBean.class.cast(locator
+                    .localizarAlunoBean())
                     .procurar(criterios);
         } catch (LocalizarObjetoException ex) {
             Logger.getLogger(AlunoDelegate.class.getName()).log(Level.SEVERE, null, ex);

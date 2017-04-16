@@ -30,13 +30,13 @@ public class AlunoMBean extends AplicacaoMBean
 
     @Inject
     @DaoProducer
-    AlunoDao alunoDao;
+    private AlunoDao alunoDao;
 
     @PersistenceContext(unitName = "abdi.formulario")
-    EntityManager manager;
+    private EntityManager manager;
 
     @Resource
-    SessionContext context;
+    private SessionContext context;
 
     public AlunoDao getAlunoDao() {
         this.alunoDao.setEntityManager(this.manager);

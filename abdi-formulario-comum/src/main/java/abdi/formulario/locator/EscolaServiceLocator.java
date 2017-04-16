@@ -1,7 +1,7 @@
 package abdi.formulario.locator;
 
 import abdi.formulario.excecao.LocalizarObjetoException;
-import abdi.formulario.fachada.IAlunoMBean;
+import abdi.formulario.fachada.IAplicacaoMBean;
 
 /**
  *
@@ -9,8 +9,8 @@ import abdi.formulario.fachada.IAlunoMBean;
  */
 public class EscolaServiceLocator extends AplicacaoServiceLocator {
 
-    public IAlunoMBean localizarAlunoBean() throws LocalizarObjetoException {
-        return (IAlunoMBean) localizar(
+    public IAplicacaoMBean localizarAlunoBean() throws LocalizarObjetoException {
+        return (IAplicacaoMBean) localizar(
                 LocatorResourceBundle
                 .get()
                 .getJndi(Jndi.ALUNOMBEAN.getJndiName())

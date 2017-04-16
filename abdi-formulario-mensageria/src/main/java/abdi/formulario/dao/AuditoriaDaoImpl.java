@@ -1,11 +1,14 @@
 package abdi.formulario.dao;
 
 import abdi.formulario.dto.CriteriosConsultaDTO;
+import abdi.formulario.excecao.PersistenciaException;
 import abdi.formulario.mensageria.vo.MensagemAuditoria;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.bson.Document;
@@ -34,7 +37,7 @@ public class AuditoriaDaoImpl extends AplicacaoDaoImpl implements AuditoriaDao {
             }
             auditorias.insertOne(dados);
         } catch (Exception excecao) {
-            throw new RuntimeException(excecao);
+            throw new PersistenciaException(excecao);
         } finally {
             fecharConexao(mongoClient);
         }
@@ -42,7 +45,25 @@ public class AuditoriaDaoImpl extends AplicacaoDaoImpl implements AuditoriaDao {
 
     @Override
     public List<MensagemAuditoria> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        MongoClient mongoClient = null;
+        List<MensagemAuditoria> lista = new ArrayList<>();
+        try {
+            mongoClient = obterConexao();
+            MongoCollection<Document> auditorias = obterDatabase(mongoClient, "aplicacaoConceito").getCollection("auditoria");
+            MongoCursor<Document> cursor = auditorias.find().iterator();
+            while (cursor.hasNext()) {
+                Document documento = cursor.next();
+                MensagemAuditoria mensagem = new MensagemAuditoria();
+                mensagem.setConteudo(documento.toJson());
+                lista.add(mensagem);
+            }
+            cursor.close();
+        } catch (Exception excecao) {
+            throw new PersistenciaException(excecao);
+        } finally {
+            fecharConexao(mongoClient);
+        }
+        return lista;
     }
 
     @Override

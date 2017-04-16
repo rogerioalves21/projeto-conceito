@@ -2,7 +2,6 @@ package abdi.formulario.rs;
 
 import abdi.entidades.Aluno;
 import abdi.formulario.delegate.AlunoDelegate;
-import abdi.formulario.rest.LocalizaServicoRest;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -16,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/alunos")
 @Produces({MediaType.APPLICATION_JSON})
 public class ListarAlunosResource {
+
     private static final long serialVersionUID = -1903885930512660931L;
 
     @Inject
@@ -23,8 +23,6 @@ public class ListarAlunosResource {
 
     @GET
     public List<Aluno> listar() {
-        LocalizaServicoRest rest = new LocalizaServicoRest();
-        rest.teste();
         return alunoDelegate.listar();
     }
 
