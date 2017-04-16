@@ -53,12 +53,7 @@
             <version>1</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>ejb3-persistence</artifactId>
-            <version>3.0</version>
-            <scope>provided</scope>
-        </dependency>
+        
         <dependency>
             <groupId>br.com.abdi</groupId>
             <artifactId>abdi-formulario-comum</artifactId>
