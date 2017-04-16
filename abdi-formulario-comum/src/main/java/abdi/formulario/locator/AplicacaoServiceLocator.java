@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package abdi.formulario.locator;
 
 import abdi.formulario.excecao.LocalizarObjetoException;
@@ -13,13 +8,22 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 /**
+ * Classe responsável por localizar objetos e serviços.
  *
  * @author Rogerio.Rodrigues
  */
 public class AplicacaoServiceLocator {
 
     private static final String EJB = "ejb:";
-    
+    private static final String REST = "rest:";
+
+    /**
+     * Localiza um serviço.
+     *
+     * @param jndi Nome do serviço.
+     * @return Interface do serviço.
+     * @throws LocalizarObjetoException Erro ao localizar o objeto.
+     */
     public IAplicacaoMBean localizar(String jndi) throws LocalizarObjetoException {
         String prefixo = jndi.substring(0, 4);
         if (prefixo.equals(EJB)) {
@@ -28,6 +32,13 @@ public class AplicacaoServiceLocator {
         return null;
     }
 
+    /**
+     * Localiza um serviço ejb.
+     *
+     * @param jndi Nome do serviço.
+     * @return Interface.
+     * @throws LocalizarObjetoException Erro ao localizar o serviço.
+     */
     private IAplicacaoMBean localizarEjb(String jndi) throws LocalizarObjetoException {
         InitialContext ctx;
         try {

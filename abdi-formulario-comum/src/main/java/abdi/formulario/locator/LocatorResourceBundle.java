@@ -1,5 +1,6 @@
-package abdi.formulario.mensagens;
+package abdi.formulario.locator;
 
+import abdi.formulario.mensagens.MensagemResourceBundle;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -7,22 +8,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Classe responsável por localizar e devolver as mensagens.
  *
  * @author Rogerio.Rodrigues
  */
-public class MensagemResourceBundle {
+public class LocatorResourceBundle {
 
-    private static final MensagemResourceBundle INSTANCIA = new MensagemResourceBundle();
-    private final String arquivo = "mensagens.properties";
-    Properties prop = new Properties();
+    private static final LocatorResourceBundle INSTANCIA = new LocatorResourceBundle();
+    private final String arquivo = "locator.properties";
+    private final Properties prop = new Properties();
 
-    MensagemResourceBundle() {
+    LocatorResourceBundle() {
     }
-    
-    public static MensagemResourceBundle get() {
+
+    public static LocatorResourceBundle get() {
         return INSTANCIA;
     }
-    
+
+    /**
+     * Realiza a carga do arquivo de propriedades.
+     */
     public void carregarArquivo() {
         if (prop.isEmpty()) {
             InputStream input = getClass().getClassLoader().getResourceAsStream(arquivo);
@@ -30,14 +35,13 @@ public class MensagemResourceBundle {
                 prop.load(input);
             } catch (IOException ex) {
                 Logger.getLogger(MensagemResourceBundle.class.getName()).log(Level.SEVERE, null, ex);
-                throw new RuntimeException("Erro ao carregar o arquivo de mensagens");
+                throw new RuntimeException("Erro ao carregar o arquivo de locator");
             }
         }
     }
 
-    public String getMensagem(String chave) {
+    public String getJndi(String chave) {
         carregarArquivo();
         return this.prop.getProperty(chave);
     }
-
 }

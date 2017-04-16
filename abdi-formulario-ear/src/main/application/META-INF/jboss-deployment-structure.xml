@@ -7,6 +7,9 @@
             <resource-root path="lib/abdi-formulario-comum-1.0.0.0-SNAPSHOT.jar" />
             <resource-root path="mongo-java-driver-3.4.2.jar"/>
         </resources>
+        <dependencies>  
+            <module name="org.apache.httpcomponents" />  
+        </dependencies>  
     </deployment>
     <sub-deployment name="abdi-formulario-mensageria-1.0.0.0-SNAPSHOT.jar">
         <dependencies>
