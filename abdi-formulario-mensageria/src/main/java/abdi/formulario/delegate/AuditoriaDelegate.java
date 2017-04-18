@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.inject.Inject;
 
 /**
+ * Acesso aos servicos de auditoria ejb.
  *
  * @author Rogerio.Rodrigues
  */
@@ -22,14 +23,23 @@ public class AuditoriaDelegate
     @Locator
     private EscolaServiceLocator locator;
 
+    /**
+     * Metodo responsavel por listar as mensagens de auditoria.
+     * @return Lista de mensagens.
+     */
     public List<MensagemAuditoria> listar() {
         try {
             return IMensagemMBean.class.cast(locator
                     .localizarAuditoriaBean())
                     .listar();
-        } catch (LocalizarObjetoException ex) {
-            Logger.getLogger(AuditoriaDelegate.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException(ex);
+        } catch (LocalizarObjetoException excecao) {
+            Logger.getLogger(AuditoriaDelegate.class.getName())
+                        .log(
+                                Level.SEVERE,
+                                "Erro ao obter as mensagens.",
+                                excecao
+                        );
+            throw new RuntimeException(excecao);
         }
     }
 
