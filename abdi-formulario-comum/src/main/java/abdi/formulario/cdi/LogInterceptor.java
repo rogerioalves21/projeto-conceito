@@ -7,13 +7,17 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 /**
- *
+ * Classe responsavel por realizar o log de metodos e classes.
+ * 
  * @author Rogerio.Rodrigues
  */
 @Interceptor
 @Logged
 public class LogInterceptor {
 
+    /**
+     * 
+     */
     @AroundInvoke
     public Object log(InvocationContext context) throws Exception {
         Logger
