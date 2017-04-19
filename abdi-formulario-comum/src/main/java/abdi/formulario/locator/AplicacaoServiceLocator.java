@@ -14,8 +14,8 @@ import javax.naming.NamingException;
  */
 public class AplicacaoServiceLocator {
 
-    private static final String EJB = "ejb:";
-    private static final String REST = "rest:";
+    protected static final String EJB = "ejb:";
+    protected static final String REST = "rest:";
 
     /**
      * Localiza um serviço.
