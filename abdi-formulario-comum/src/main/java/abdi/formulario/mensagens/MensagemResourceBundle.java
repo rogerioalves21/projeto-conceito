@@ -3,41 +3,51 @@ package abdi.formulario.mensagens;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import abdi.formulario.log.AplicacaoLogger;
 
 /**
- *
+ * Classe responsável por obter as mensagens do sistema.
+ * 
  * @author Rogerio.Rodrigues
  */
 public class MensagemResourceBundle {
 
     private static final MensagemResourceBundle INSTANCIA = new MensagemResourceBundle();
-    private final String arquivo = "mensagens.properties";
-    private final Properties prop = new Properties();
+    private static final String                        ARQUIVO   = "mensagens.properties";
+    private static final Properties                    PROP      = new Properties();
+    private static final String                 ERRO      = "Erro ao carregar o arquivo de mensagens";
 
+    /**
+     * Singleton.
+     */
     MensagemResourceBundle() {
     }
     
+    /**
+     * Retorna a instância.
+     * 
+     * @return {@code MensagemResourceBundle}.
+     */
     public static MensagemResourceBundle get() {
         return INSTANCIA;
     }
-    
+
     public void carregarArquivo() {
-        if (prop.isEmpty()) {
-            InputStream input = getClass().getClassLoader().getResourceAsStream(arquivo);
+        if (PROP.isEmpty()) {
+            InputStream input = getClass().getClassLoader().getResourceAsStream(ARQUIVO);
             try {
-                prop.load(input);
-            } catch (IOException ex) {
-                Logger.getLogger(MensagemResourceBundle.class.getName()).log(Level.SEVERE, null, ex);
-                throw new RuntimeException("Erro ao carregar o arquivo de mensagens");
+                PROP.load(input);
+            } catch (IOException excecao) {
+                AplicacaoLogger.getLogger(getClass()).error(ERRO, excecao);
+                throw new RuntimeException(ERRO);
             }
         }
     }
 
     public String getMensagem(String chave) {
         carregarArquivo();
-        return this.prop.getProperty(chave);
+        return this.PROP.getProperty(chave);
     }
 
 }

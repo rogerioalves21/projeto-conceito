@@ -4,12 +4,14 @@ import abdi.formulario.excecao.LocalizarObjetoException;
 import abdi.formulario.fachada.IAplicacaoMBean;
 
 /**
- *
+ * Service locator para a aplicação de escola.
+ * 
  * @author Rogerio.Rodrigues
  */
 public class EscolaServiceLocator extends AplicacaoServiceLocator {
 
-    public IAplicacaoMBean localizarAlunoBean() throws LocalizarObjetoException {
+    public IAplicacaoMBean localizarAlunoBean()
+        throws LocalizarObjetoException {
         return (IAplicacaoMBean) localizar(
                 LocatorResourceBundle
                 .get()
@@ -17,7 +19,8 @@ public class EscolaServiceLocator extends AplicacaoServiceLocator {
         );
     }
     
-     public IAplicacaoMBean localizarAuditoriaBean() throws LocalizarObjetoException {
+     public IAplicacaoMBean localizarAuditoriaBean()
+        throws LocalizarObjetoException {
         return (IAplicacaoMBean) localizar(
                 LocatorResourceBundle
                 .get()
