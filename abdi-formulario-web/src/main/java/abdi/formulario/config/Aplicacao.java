@@ -10,11 +10,16 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 /**
- * Created by Rogerio.Rodrigues on 17/03/2017.
+ * Resources disponíveis.
+ * 
+ * @author Rogério Alves Rodrigues
  */
 @ApplicationPath("escola")
 public class Aplicacao extends Application {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classes = new HashSet<Class<?>>();
