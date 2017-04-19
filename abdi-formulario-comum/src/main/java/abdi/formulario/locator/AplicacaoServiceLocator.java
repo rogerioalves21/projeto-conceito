@@ -28,7 +28,21 @@ public class AplicacaoServiceLocator {
         String prefixo = jndi.substring(0, 4);
         if (prefixo.equals(EJB)) {
             return localizarEjb(jndi);
+        } else if (prefixo.equals(REST)) {
+            return localizarRest(jndi);            
         }
+        return null;
+    }
+    
+    /**
+     * Localiza um servico rest.
+     * 
+     * @param jndi Nome do servico.
+     * @return Interface para consumo.
+     * @throws LocalizarObjetoException Erro ao localizar o objeto.
+     */
+    private IAplicacaoMBean localizarRest(String jndi)
+        throws LocalizarObjetoException {
         return null;
     }
 
@@ -39,7 +53,8 @@ public class AplicacaoServiceLocator {
      * @return Interface.
      * @throws LocalizarObjetoException Erro ao localizar o serviço.
      */
-    private IAplicacaoMBean localizarEjb(String jndi) throws LocalizarObjetoException {
+    private IAplicacaoMBean localizarEjb(String jndi)
+        throws LocalizarObjetoException {
         InitialContext ctx;
         try {
             ctx = new InitialContext();
