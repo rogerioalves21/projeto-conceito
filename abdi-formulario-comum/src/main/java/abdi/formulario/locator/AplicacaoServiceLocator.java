@@ -43,7 +43,8 @@ public class AplicacaoServiceLocator {
         InitialContext ctx;
         try {
             ctx = new InitialContext();
-            Logger.getLogger(getClass().getName()).log(Level.INFO, "Localizando o objeto {0}", jndi);
+            Logger.getLogger(getClass().getName())
+                .log(Level.INFO, "Localizando o objeto {0}", jndi);
             return (IAplicacaoMBean) ctx.lookup(jndi.replaceAll(EJB, ""));
         } catch (NamingException excecao) {
             throw new LocalizarObjetoException(excecao);
