@@ -2,8 +2,7 @@ package abdi.formulario.locator;
 
 import abdi.formulario.excecao.LocalizarObjetoException;
 import abdi.formulario.fachada.IAplicacaoMBean;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import abdi.formulario.log.AplicacaoLogger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -58,8 +57,8 @@ public class AplicacaoServiceLocator {
         InitialContext ctx;
         try {
             ctx = new InitialContext();
-            Logger.getLogger(getClass().getName())
-                .log(Level.INFO, "Localizando o objeto {0}", jndi);
+            AplicacaoLogger.getLogger(getClass())
+                .info("Localizando o objeto ".concat(jndi));
             return (IAplicacaoMBean) ctx.lookup(jndi.replaceAll(EJB, ""));
         } catch (NamingException excecao) {
             throw new LocalizarObjetoException(excecao);
