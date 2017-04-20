@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Escola</title>
+        <meta charset="iso-8859-1" />
+        <!-- Or use TAG number for specific version. New versions are auto deployed -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <script>
+            $.getJSON("http://localhost:8080/abdi-formulario-web/escola/alunos", function (alunos) {
+                $("#tabela").append("<tbody>");
+                $.each(alunos, function (i, aluno) {
+                    $("#tabela").append("<tr><td>" + aluno.codigo + "</td><td>" + aluno.nome + "</td></tr>");
+                });
+                $("#tabela").append("</tbody>");
+            });
+
+            function procurar() {
+                $("#tabela").empty();
+                $("#tabela").append(" <thead><th style=\"width: 20%\">#</th><th style=\"width: 80%\">Nome</th></thead>");
+                $.getJSON("http://localhost:8080/abdi-formulario-web/escola/aluno/" + $("#nome").val(), function (alunos) {
+                    $("#tabela").append("<tbody>");
+                    $.each(alunos, function (i, aluno) {
+                        $("#tabela").append("<tr><td>" + aluno.codigo + "</td><td>" + aluno.nome + "</td></tr>");
+                    });
+                    $("#tabela").append("</tbody>");
+                });
+            }
+
+            function voltar() {
+                window.location.href = "http://localhost:8080/abdi-formulario-web/index.html";
+            }
+            function incluir() {
+                window.location.href = "http://localhost:8080/abdi-formulario-web/privado/incluir.html";
+            }
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-fixed-top navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Cadastro de Alunos e Matérias</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="http://localhost:8080/abdi-formulario-web/privado/listar.html">Alunos</a></li>
+                        <li><a href="#materias">Matérias</a></li>
+                        <li><a href="#provas">Provas</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="page-header">
+
+            </div>
+
+            <div class="page-header">
+                <h4>Alunos</h4>
+            </div>
+        </div>
+
+        <div class="container" role="main">
+            <div style="width: 180px;">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Procurar
+                <form>
+                    <div class="form-group">
+                        <label for="nome" class="col-2 col-form-label">Nome</label>
+                        <input class="form-control" placeholder="digite o nome" id="nome" name= "nome" type="text"/>
+                    </div>
+                    <input type="button" onclick="procurar();" name="botao" value="Procurar" class="btn btn-sm btn-default"/>
+                </form>
+            </div>
+            <table id="tabela" class="table table-striped">
+                <thead>
+                <th style="width: 20%">#</th>
+                <th style="width: 80%">Nome</th>
+                </thead>
+            </table>
+            <div>
+                <button class="btn btn-sm btn-default" type="button" id="btnVoltar"
+                        onclick="voltar()">
+                    <span>Voltar</span>
+                </button>
+                <button class="btn btn-sm btn-primary" id="btnNovo" onclick="incluir()">Novo</button>
+            </div>
+        </div>
+    </body>
+</html>

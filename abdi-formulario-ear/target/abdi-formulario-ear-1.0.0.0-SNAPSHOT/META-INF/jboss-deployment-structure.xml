@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+    <ear-subdeployments-isolated>false</ear-subdeployments-isolated>
+    <deployment>
+        <resources>
+            <resource-root path="lib/abdi-formulario-jaas-1.0.0.0-SNAPSHOT.jar" />
+            <resource-root path="lib/abdi-formulario-comum-1.0.0.0-SNAPSHOT.jar" />
+            <resource-root path="mongo-java-driver-3.4.2.jar"/>
+        </resources>
+        <dependencies>  
+            <module name="org.apache.httpcomponents" />  
+        </dependencies>  
+    </deployment>
+    <sub-deployment name="abdi-formulario-mensageria-1.0.0.0-SNAPSHOT.jar">
+        <dependencies>
+
+        </dependencies>
+    </sub-deployment>
+    <sub-deployment name="abdi-formulario-ejb-1.0.0.0-SNAPSHOT.jar">
+        <dependencies>
+
+        </dependencies>
+    </sub-deployment>
+    <sub-deployment name="abdi-formulario-web-1.0.0.0-SNAPSHOT.war">
+        <dependencies>
+            <module name="deployment.abdi-formulario-ear-1.0.0.0-SNAPSHOT.ear.abdi-formulario-ejb-1.0.0.0-SNAPSHOT.jar" />
+        </dependencies>
+    </sub-deployment>
+</jboss-deployment-structure>

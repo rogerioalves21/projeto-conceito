@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    
+    <filter>
+        <filter-name>loginFilter</filter-name>
+        <filter-class>abdi.formulario.filter.AplicacaoFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <url-pattern>/privado/*</url-pattern>
+    </filter-mapping>
+    
+    <welcome-file-list>
+        <welcome-file>
+            index.html
+        </welcome-file>
+    </welcome-file-list>
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>all</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>
+            <role-name>super-user</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-role>
+        <role-name>user</role-name>
+        <role-name>super-user</role-name>
+    </security-role>
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>default</realm-name>
+        <form-login-config>
+            <form-login-page>/login/login.html</form-login-page>
+            <form-error-page>/login/login.html?erro=true</form-error-page>
+        </form-login-config>
+        
+    </login-config>
+    
+    <session-config>
+        <session-timeout>
+            1
+        </session-timeout>
+    </session-config>
+</web-app>

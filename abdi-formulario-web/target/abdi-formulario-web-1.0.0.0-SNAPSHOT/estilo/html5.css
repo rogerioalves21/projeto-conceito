@@ -1,0 +1,12 @@
+div {
+    font-family: Calibri;
+}
+
+th {
+    background-color: #EBEBEB;
+}
+
+td {
+    border: 1px solid #EBEBEB;
+    background-color: #FFFFFF;
+}
