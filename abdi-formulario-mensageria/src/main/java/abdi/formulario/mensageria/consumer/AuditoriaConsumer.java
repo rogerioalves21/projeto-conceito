@@ -25,7 +25,7 @@ import javax.jms.ObjectMessage;
 public class AuditoriaConsumer implements MessageListener {
 
     @Inject
-    AuditoriaDao dao;
+    private AuditoriaDao dao;
 
     @Override
     public void onMessage(Message message) {

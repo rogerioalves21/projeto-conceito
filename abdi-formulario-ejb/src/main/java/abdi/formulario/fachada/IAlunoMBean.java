@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package abdi.formulario.fachada;
 
 import abdi.entidades.Aluno;
@@ -17,10 +12,10 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface IAlunoMBean extends IAplicacaoMBean {
-    
+
     List<Aluno> listar();
 
     void incluir(Aluno aluno) throws AplicacaoException;
-    
-     List<Aluno> procurar(CriteriosConsultaDTO criterios);
+
+    List<Aluno> procurar(CriteriosConsultaDTO criterios);
 }

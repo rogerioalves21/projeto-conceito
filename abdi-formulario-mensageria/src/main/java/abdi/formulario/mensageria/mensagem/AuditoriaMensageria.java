@@ -22,15 +22,20 @@ import javax.naming.NamingException;
 public class AuditoriaMensageria implements Serializable {
     private static final long serialVersionUID = 9023492761239834551L;
 
-    ConnectionFactory connectionFactory;
-    Destination destination;
+    private ConnectionFactory connectionFactory;
+    private Destination       destination;
 
+    /**
+     * Envia a mensagem de auditoria para a fila JMS.
+     * 
+     * @param mensagem Mensagem a ser enviada.
+     */
     public void enviarMensagem(MensagemAuditoria mensagem) {
         try {
             Context ctx = new InitialContext();
-            connectionFactory = (ConnectionFactory) ctx.lookup("java:/AutidoriaConnectionFactory");
-            destination = (Destination) ctx.lookup("java:/jms/queue/Auditoria");
-            QueueConnection connection = (QueueConnection) connectionFactory.createConnection();
+            connectionFactory = (ConnectionFactory)ctx.lookup("java:/AutidoriaConnectionFactory");
+            destination = (Destination)ctx.lookup("java:/jms/queue/Auditoria");
+            QueueConnection connection = (QueueConnection)connectionFactory.createConnection();
             QueueSession session = connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
             MessageProducer producer = session.createProducer(destination);
             session.createObjectMessage(mensagem);
@@ -48,12 +53,12 @@ public class AuditoriaMensageria implements Serializable {
         mensagem.setConteudo(descricao);
         return mensagem;
     }
-    
+
     public class Mensagem implements Serializable {
         private static final long serialVersionUID = 7046278335906061906L;
 
-        private String descricao;
-        private String id;
+        private String            descricao;
+        private String            id;
 
         /**
          * @return the descricao
@@ -82,9 +87,9 @@ public class AuditoriaMensageria implements Serializable {
         public void setId(String id) {
             this.id = id;
         }
-        
+
         public String toString() {
-             return this.descricao;
+            return this.descricao;
         }
 
     }

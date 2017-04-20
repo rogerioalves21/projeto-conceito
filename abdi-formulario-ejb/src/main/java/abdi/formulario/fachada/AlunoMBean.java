@@ -6,11 +6,14 @@ import abdi.formulario.dao.AlunoDao;
 import abdi.formulario.dao.DaoProducer;
 import abdi.formulario.dto.CriteriosConsultaDTO;
 import abdi.formulario.excecao.AplicacaoException;
+import abdi.formulario.log.AplicacaoLogger;
 import abdi.formulario.mensagens.MensagemResourceBundle;
 import abdi.formulario.mensagens.Mensagens;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
@@ -47,10 +50,12 @@ public class AlunoMBean extends AplicacaoMBean
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Aluno> listar() {
-        Logger.getLogger(getClass().getName())
-                .log(
-                        Level.INFO, "Usu\u00e1rio logado: {0}",
+        AplicacaoLogger.getLogger(getClass())
+                .info(
+                    "Usu\u00e1rio logado:"
+                    .concat(
                         context.getCallerPrincipal().getName()
+                    )
                 );
         return getAlunoDao().listar();
     }

@@ -19,6 +19,11 @@ import org.bson.Document;
  */
 public class AuditoriaDaoImpl extends AplicacaoDaoImpl implements AuditoriaDao {
 
+    private static final String LOGIN        = "login";
+    private static final String DATAHORA     = "dataHora";
+    private static final String DATABASENAME = "aplicacaoConceito";
+    private static final String AUDITORIA    = "auditoria";
+
     @Override
     public void incluir(MensagemAuditoria mensagem) {
         MongoClient mongoClient = null;
@@ -28,12 +33,12 @@ public class AuditoriaDaoImpl extends AplicacaoDaoImpl implements AuditoriaDao {
             format.format(new Date());
 
             Document dados = new Document();
-            dados.put("login", mensagem.getConteudo());
-            dados.put("dataHora", format.format(new Date()));
-            MongoCollection<Document> auditorias = obterDatabase(mongoClient, "aplicacaoConceito").getCollection("auditoria");
+            dados.put(LOGIN, mensagem.getConteudo());
+            dados.put(DATAHORA, format.format(new Date()));
+            MongoCollection<Document> auditorias = obterDatabase(mongoClient, DATABASENAME).getCollection(AUDITORIA);
             if (auditorias == null) {
-                obterDatabase(mongoClient, "aplicacaoConceito").createCollection("auditoria");
-                auditorias = obterDatabase(mongoClient, "aplicacaoConceito").getCollection("auditoria");
+                obterDatabase(mongoClient, DATABASENAME).createCollection(AUDITORIA);
+                auditorias = obterDatabase(mongoClient, DATABASENAME).getCollection(AUDITORIA);
             }
             auditorias.insertOne(dados);
         } catch (Exception excecao) {
