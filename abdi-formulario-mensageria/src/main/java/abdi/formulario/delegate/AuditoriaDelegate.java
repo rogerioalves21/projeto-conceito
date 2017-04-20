@@ -6,11 +6,7 @@ import abdi.formulario.locator.EscolaServiceLocator;
 import abdi.formulario.locator.Locator;
 import abdi.formulario.log.AplicacaoLogger;
 import abdi.formulario.mensageria.vo.MensagemAuditoria;
-
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.inject.Inject;
 
 /**
