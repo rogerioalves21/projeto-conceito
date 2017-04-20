@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AplicacaoDataSource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">abdi-formulario-comum</a> &gt; <a href="index.source.html" class="el_package">abdi.formulario.dao</a> &gt; <span class="el_source">AplicacaoDataSource.java</span></div><h1>AplicacaoDataSource.java</h1><pre class="source lang-java linenums">package abdi.formulario.dao;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import java.net.URLEncoder;
+
+/**
+ *
+ * @author Rogerio.Rodrigues
+ */
+<span class="nc" id="L11">public class AplicacaoDataSource {</span>
+
+    public MongoClient criarConexao() {
+        MongoClient mongoClient;
+        try {
+<span class="nc" id="L16">            String arroba = URLEncoder.encode(&quot;@&quot;);</span>
+<span class="nc" id="L17">            MongoClientURI uri = new MongoClientURI(</span>
+                    &quot;mongodb://rogeriorodrigues:&quot; + arroba + &quot;Loureiro3@cop-shard-00-00-3ivio.mongodb.net:27017,cop-shard-00-01-3ivio.mongodb.net:27017,cop-shard-00-02-3ivio.mongodb.net:27017/COP?ssl=true&amp;replicaSet=COP-shard-0&amp;authSource=admin&quot;);
+<span class="nc" id="L19">            mongoClient = new MongoClient(uri);</span>
+<span class="nc" id="L20">            return mongoClient;</span>
+<span class="nc" id="L21">        } catch (Exception excecao) {</span>
+<span class="nc" id="L22">            throw new RuntimeException(excecao);</span>
+        }
+    }
+
+    public void fecharConexao(MongoClient client) {
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        if (client != null) {</span>
+<span class="nc" id="L28">            client.close();</span>
+        }
+<span class="nc" id="L30">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

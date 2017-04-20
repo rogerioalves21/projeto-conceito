@@ -1,4 +1,5 @@
 abdi/formulario/locator/EscolaServiceLocator.class
+abdi/formulario/log/AplicacaoLogger.class
 abdi/formulario/cdi/LogInterceptor.class
 abdi/formulario/fachada/AplicacaoMBean.class
 abdi/formulario/locator/Locator.class

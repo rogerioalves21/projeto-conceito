@@ -18,5 +18,6 @@
 /projects/projeto-conceito/abdi-formulario-comum/src/main/java/abdi/formulario/delegate/IAplicacaoDelegate.java
 /projects/projeto-conceito/abdi-formulario-comum/src/main/java/abdi/formulario/fachada/AplicacaoMBean.java
 /projects/projeto-conceito/abdi-formulario-comum/src/main/java/abdi/formulario/rest/LocalizaServicoRest.java
+/projects/projeto-conceito/abdi-formulario-comum/src/main/java/abdi/formulario/log/AplicacaoLogger.java
 /projects/projeto-conceito/abdi-formulario-comum/src/main/java/abdi/formulario/mensagens/MensagemResourceBundle.java
 /projects/projeto-conceito/abdi-formulario-comum/src/main/java/abdi/formulario/locator/AplicacaoServiceLocator.java
