@@ -14,9 +14,13 @@ import javax.naming.NamingException;
 public class LocalizarObjetoException extends Exception {
     private static final long serialVersionUID = -7833532467941638260L;
 
-    public LocalizarObjetoException(NamingException ex) {
-<span class="nc" id="L18">        super(ex);</span>
+    public LocalizarObjetoException(String mensagem) {
+<span class="nc" id="L18">        super(mensagem);</span>
 <span class="nc" id="L19">    }</span>
+
+    public LocalizarObjetoException(NamingException excecao) {
+<span class="nc" id="L22">        super(excecao);</span>
+<span class="nc" id="L23">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

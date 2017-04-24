@@ -1,35 +1,51 @@
 package abdi.formulario.rest;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+
+import abdi.formulario.dto.RequisicaoRestDTO;
+import abdi.formulario.excecao.LocalizarObjetoException;
+import abdi.formulario.log.AplicacaoLogger;
 
 /**
- *
+ * Localiza serviços rest.
  * @author Rogerio.Rodrigues
  */
-public class LocalizaServicoRest {
+public class LocalizaServicoRest implements IRestServico {
 
-    public void teste() {
+    private static final String ERRO = "Erro ao obter o serviço rest";
+    private final String provider;
+    private final String path;
+
+    /**
+     * Construtor.
+     * @param provider Provedor do resource.
+     * @param path Nome do resource.
+     */
+    public LocalizaServicoRest(String provider, String path) {
+        this.provider = provider;
+        this.path = path;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Object consumir(RequisicaoRestDTO requisicao, Class< ? > tipoRetorno) throws LocalizarObjetoException {
         try {
-            Logger.getLogger(LocalizaServicoRest.class.getName()).log(Level.INFO, "Tentando localizar o rest");
-            HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet("http://localhost:8080/abdi-formulario-web/escola/alunos");
-            HttpResponse response = client.execute(request);
-            InputStream inputStream = response.getEntity().getContent();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
-            String line = "";
-            while ((line = rd.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(LocalizaServicoRest.class.getName()).log(Level.SEVERE, null, ex);
+            AplicacaoLogger.getLogger(getClass()).info( "Tentando localizar o rest");
+            Client client = ClientBuilder.newClient();
+            WebTarget target = client.target(this.provider).path(this.path);
+            return target.request(MediaType.APPLICATION_JSON).post(Entity.entity(requisicao, MediaType.APPLICATION_JSON), tipoRetorno);
+        } catch (Exception excecao) {
+            AplicacaoLogger.getLogger(getClass()).error(ERRO, excecao);
+            throw new LocalizarObjetoException(ERRO);
         }
     }
 

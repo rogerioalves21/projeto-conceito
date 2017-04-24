@@ -14,8 +14,12 @@ import javax.naming.NamingException;
 public class LocalizarObjetoException extends Exception {
     private static final long serialVersionUID = -7833532467941638260L;
 
-    public LocalizarObjetoException(NamingException ex) {
-        super(ex);
+    public LocalizarObjetoException(String mensagem) {
+        super(mensagem);
+    }
+
+    public LocalizarObjetoException(NamingException excecao) {
+        super(excecao);
     }
     
 }
