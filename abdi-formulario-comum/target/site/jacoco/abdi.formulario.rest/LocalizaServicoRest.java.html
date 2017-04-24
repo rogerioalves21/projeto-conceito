@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocalizaServicoRest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">abdi-formulario-comum</a> &gt; <a href="index.source.html" class="el_package">abdi.formulario.rest</a> &gt; <span class="el_source">LocalizaServicoRest.java</span></div><h1>LocalizaServicoRest.java</h1><pre class="source lang-java linenums">package abdi.formulario.rest;
 
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -16,6 +12,7 @@ import abdi.formulario.log.AplicacaoLogger;
 
 /**
  * Localiza serviços rest.
+ * 
  * @author Rogerio.Rodrigues
  */
 public class LocalizaServicoRest implements IRestServico {
@@ -27,25 +24,26 @@ public class LocalizaServicoRest implements IRestServico {
     /**
      * Construtor.
      * @param provider Provedor do resource.
+     * 
      * @param path Nome do resource.
      */
-<span class="nc" id="L32">    public LocalizaServicoRest(String provider, String path) {</span>
-<span class="nc" id="L33">        this.provider = provider;</span>
-<span class="nc" id="L34">        this.path = path;</span>
-<span class="nc" id="L35">    }</span>
+<span class="nc" id="L30">    public LocalizaServicoRest(String provider, String path) {</span>
+<span class="nc" id="L31">        this.provider = provider;</span>
+<span class="nc" id="L32">        this.path = path;</span>
+<span class="nc" id="L33">    }</span>
 
     /**
      * {@inheritDoc}
      */
     public Object consumir(RequisicaoRestDTO requisicao, Class&lt; ? &gt; tipoRetorno) throws LocalizarObjetoException {
         try {
-<span class="nc" id="L42">            AplicacaoLogger.getLogger(getClass()).info( &quot;Tentando localizar o rest&quot;);</span>
-<span class="nc" id="L43">            Client client = ClientBuilder.newClient();</span>
-<span class="nc" id="L44">            WebTarget target = client.target(this.provider).path(this.path);</span>
-<span class="nc" id="L45">            return target.request(MediaType.APPLICATION_JSON).post(Entity.entity(requisicao, MediaType.APPLICATION_JSON), tipoRetorno);</span>
-<span class="nc" id="L46">        } catch (Exception excecao) {</span>
-<span class="nc" id="L47">            AplicacaoLogger.getLogger(getClass()).error(ERRO, excecao);</span>
-<span class="nc" id="L48">            throw new LocalizarObjetoException(ERRO);</span>
+<span class="nc" id="L40">            AplicacaoLogger.getLogger(getClass()).info( &quot;Tentando localizar o rest&quot;);</span>
+<span class="nc" id="L41">            Client client = ClientBuilder.newClient();</span>
+<span class="nc" id="L42">            WebTarget target = client.target(this.provider).path(this.path);</span>
+<span class="nc" id="L43">            return target.request(MediaType.APPLICATION_JSON).post(Entity.entity(requisicao, MediaType.APPLICATION_JSON), tipoRetorno);</span>
+<span class="nc" id="L44">        } catch (Exception excecao) {</span>
+<span class="nc" id="L45">            AplicacaoLogger.getLogger(getClass()).error(ERRO, excecao);</span>
+<span class="nc" id="L46">            throw new LocalizarObjetoException(ERRO);</span>
         }
     }
 

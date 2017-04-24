@@ -22,4 +22,5 @@ abdi/formulario/excecao/AplicacaoException.class
 abdi/formulario/entidades/AplicacaoEntidade.class
 abdi/formulario/locator/Jndi.class
 abdi/formulario/excecao/PersistenciaException.class
+abdi/formulario/rmi/LocalizaServicoEjb.class
 abdi/formulario/rest/LocalizaServicoRest.class

@@ -4,10 +4,14 @@ import abdi.formulario.rs.IncluirAlunoResource;
 import abdi.formulario.rs.ListaAuditoriaResource;
 import abdi.formulario.rs.ListarAlunosResource;
 import abdi.formulario.rs.ProcurarAlunosResource;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 /**
  * Resources disponíveis.
@@ -27,6 +31,7 @@ public class Aplicacao extends Application {
         classes.add(IncluirAlunoResource.class);
         classes.add(ProcurarAlunosResource.class);
         classes.add(ListaAuditoriaResource.class);
+        classes.add(JacksonJsonProvider.class);
         return classes;
     }
 

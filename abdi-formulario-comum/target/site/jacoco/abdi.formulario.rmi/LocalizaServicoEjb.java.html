@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocalizaServicoEjb.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">abdi-formulario-comum</a> &gt; <a href="index.source.html" class="el_package">abdi.formulario.rmi</a> &gt; <span class="el_source">LocalizaServicoEjb.java</span></div><h1>LocalizaServicoEjb.java</h1><pre class="source lang-java linenums">package abdi.formulario.rmi;
+
+import abdi.formulario.excecao.LocalizarObjetoException;
+import abdi.formulario.fachada.IAplicacaoMBean;
+import abdi.formulario.locator.AplicacaoServiceLocator;
+import abdi.formulario.log.AplicacaoLogger;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+/**
+ * Classe responsavel por fazer o lookup de ejbs.
+ * 
+ * @author Rogerio Alves Rodrigues
+ */
+<span class="nc" id="L16">public class LocalizaServicoEjb {</span>
+
+    /**
+     * Localiza um serviço ejb.
+     *
+     * @param jndi Nome do serviço.
+     * @return Interface.
+     * @throws LocalizarObjetoException Erro ao localizar o serviço.
+     */
+    public IAplicacaoMBean localizar(String jndi)
+        throws LocalizarObjetoException {
+        InitialContext ctx;
+        try {
+<span class="nc" id="L29">            ctx = new InitialContext();</span>
+<span class="nc" id="L30">            AplicacaoLogger.getLogger(getClass())</span>
+<span class="nc" id="L31">                .info(&quot;Localizando o objeto &quot;.concat(jndi));</span>
+<span class="nc" id="L32">            return (IAplicacaoMBean) ctx.lookup(jndi.replaceAll(AplicacaoServiceLocator.EJB, &quot;&quot;));</span>
+<span class="nc" id="L33">        } catch (NamingException excecao) {</span>
+<span class="nc" id="L34">            throw new LocalizarObjetoException(excecao);</span>
+        }
+    }
+
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

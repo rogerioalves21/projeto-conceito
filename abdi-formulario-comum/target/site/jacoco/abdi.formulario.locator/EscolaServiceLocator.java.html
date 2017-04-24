@@ -12,7 +12,7 @@ import abdi.formulario.fachada.IAplicacaoMBean;
 
     public IAplicacaoMBean localizarAlunoBean()
         throws LocalizarObjetoException {
-<span class="nc" id="L15">        return (IAplicacaoMBean) localizar(</span>
+<span class="nc" id="L15">        return (IAplicacaoMBean) localizarEjb(</span>
                 LocatorResourceBundle
 <span class="nc" id="L17">                .get()</span>
 <span class="nc" id="L18">                .getJndi(Jndi.ALUNOMBEAN.getJndiName())</span>
@@ -21,7 +21,7 @@ import abdi.formulario.fachada.IAplicacaoMBean;
     
      public IAplicacaoMBean localizarAuditoriaBean()
         throws LocalizarObjetoException {
-<span class="nc" id="L24">        return (IAplicacaoMBean) localizar(</span>
+<span class="nc" id="L24">        return (IAplicacaoMBean) localizarEjb(</span>
                 LocatorResourceBundle
 <span class="nc" id="L26">                .get()</span>
 <span class="nc" id="L27">                .getJndi(Jndi.AUDITORIAMBEAN.getJndiName())</span>

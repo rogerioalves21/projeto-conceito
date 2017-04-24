@@ -1,9 +1,5 @@
 package abdi.formulario.rest;
 
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -16,6 +12,7 @@ import abdi.formulario.log.AplicacaoLogger;
 
 /**
  * Localiza serviços rest.
+ * 
  * @author Rogerio.Rodrigues
  */
 public class LocalizaServicoRest implements IRestServico {
@@ -27,6 +24,7 @@ public class LocalizaServicoRest implements IRestServico {
     /**
      * Construtor.
      * @param provider Provedor do resource.
+     * 
      * @param path Nome do resource.
      */
     public LocalizaServicoRest(String provider, String path) {

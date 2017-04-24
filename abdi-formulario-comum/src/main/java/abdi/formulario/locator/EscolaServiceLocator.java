@@ -12,7 +12,7 @@ public class EscolaServiceLocator extends AplicacaoServiceLocator {
 
     public IAplicacaoMBean localizarAlunoBean()
         throws LocalizarObjetoException {
-        return (IAplicacaoMBean) localizar(
+        return (IAplicacaoMBean) localizarEjb(
                 LocatorResourceBundle
                 .get()
                 .getJndi(Jndi.ALUNOMBEAN.getJndiName())
@@ -21,7 +21,7 @@ public class EscolaServiceLocator extends AplicacaoServiceLocator {
     
      public IAplicacaoMBean localizarAuditoriaBean()
         throws LocalizarObjetoException {
-        return (IAplicacaoMBean) localizar(
+        return (IAplicacaoMBean) localizarEjb(
                 LocatorResourceBundle
                 .get()
                 .getJndi(Jndi.AUDITORIAMBEAN.getJndiName())

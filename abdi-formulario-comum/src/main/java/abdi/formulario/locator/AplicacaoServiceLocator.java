@@ -2,9 +2,9 @@ package abdi.formulario.locator;
 
 import abdi.formulario.excecao.LocalizarObjetoException;
 import abdi.formulario.fachada.IAplicacaoMBean;
-import abdi.formulario.log.AplicacaoLogger;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import abdi.formulario.rest.IRestServico;
+import abdi.formulario.rest.LocalizaServicoRest;
+import abdi.formulario.rmi.LocalizaServicoEjb;
 
 /**
  * Classe responsável por localizar objetos e serviços.
@@ -13,26 +13,9 @@ import javax.naming.NamingException;
  */
 public class AplicacaoServiceLocator {
 
-    protected static final String EJB = "ejb:";
-    protected static final String REST = "rest:";
+    public static final String EJB = "ejb:";
+    public static final String REST = "rest:";
 
-    /**
-     * Localiza um serviço.
-     *
-     * @param jndi Nome do serviço.
-     * @return Interface do serviço.
-     * @throws LocalizarObjetoException Erro ao localizar o objeto.
-     */
-    public IAplicacaoMBean localizar(String jndi) throws LocalizarObjetoException {
-        String prefixo = jndi.substring(0, 4);
-        if (prefixo.equals(EJB)) {
-            return localizarEjb(jndi);
-        } else if (prefixo.equals(REST)) {
-            return localizarRest(jndi);            
-        }
-        return null;
-    }
-    
     /**
      * Localiza um servico rest.
      * 
@@ -40,9 +23,12 @@ public class AplicacaoServiceLocator {
      * @return Interface para consumo.
      * @throws LocalizarObjetoException Erro ao localizar o objeto.
      */
-    private IAplicacaoMBean localizarRest(String jndi)
+    public IRestServico localizarRest(String jndi)
         throws LocalizarObjetoException {
-        return null;
+        String providerPath = jndi.replaceAll(AplicacaoServiceLocator.REST, "");
+        String[] caminho = providerPath.split("::");
+        IRestServico servico = new LocalizaServicoRest(caminho[0], caminho[1]);
+        return servico;
     }
 
     /**
@@ -52,17 +38,10 @@ public class AplicacaoServiceLocator {
      * @return Interface.
      * @throws LocalizarObjetoException Erro ao localizar o serviço.
      */
-    private IAplicacaoMBean localizarEjb(String jndi)
+    public IAplicacaoMBean localizarEjb(String jndi)
         throws LocalizarObjetoException {
-        InitialContext ctx;
-        try {
-            ctx = new InitialContext();
-            AplicacaoLogger.getLogger(getClass())
-                .info("Localizando o objeto ".concat(jndi));
-            return (IAplicacaoMBean) ctx.lookup(jndi.replaceAll(EJB, ""));
-        } catch (NamingException excecao) {
-            throw new LocalizarObjetoException(excecao);
-        }
+        LocalizaServicoEjb locator = new LocalizaServicoEjb();
+        return locator.localizar(jndi);
     }
 
 }
