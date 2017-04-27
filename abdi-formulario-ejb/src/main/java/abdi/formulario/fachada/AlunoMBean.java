@@ -11,12 +11,11 @@ import abdi.formulario.mensagens.MensagemResourceBundle;
 import abdi.formulario.mensagens.Mensagens;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+import javax.annotation.security.*;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
@@ -28,8 +27,7 @@ import javax.persistence.PersistenceContext;
  * @author Rogerio.Rodrigues
  */
 @Stateless(name = "AlunoMBean", mappedName = "AlunoMBean")
-public class AlunoMBean extends AplicacaoMBean
-        implements IAlunoMBean {
+public class AlunoMBean extends AplicacaoMBean implements IAlunoMBean {
 
     @Inject
     @DaoProducer
@@ -42,24 +40,20 @@ public class AlunoMBean extends AplicacaoMBean
     private SessionContext context;
 
     public AlunoDao getAlunoDao() {
-        this.alunoDao.setEntityManager(this.manager);
-        return this.alunoDao;
+        //this.alunoDao.setEntityManager(this.manager);
+        return null;//return this.alunoDao;
     }
 
+    @RolesAllowed("super-user")
     @Logged
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Aluno> listar() {
-        AplicacaoLogger.getLogger(getClass())
-                .info(
-                    "Usu\u00e1rio logado:"
-                    .concat(
-                        context.getCallerPrincipal().getName()
-                    )
-                );
+        AplicacaoLogger.getLogger(getClass()).info("Usu\u00e1rio logado:".concat(context.getCallerPrincipal().getName()));
         return getAlunoDao().listar();
     }
 
+    @RolesAllowed("super-user")
     @Override
     @Logged
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -70,29 +64,25 @@ public class AlunoMBean extends AplicacaoMBean
 
     private void validar(Aluno aluno) throws AplicacaoException {
         if (aluno == null || aluno.getNome() == null || aluno.getNome().trim().equals("")) {
-            throw new AplicacaoException(
-                    MensagemResourceBundle
-                    .get()
-                    .getMensagem(
-                            Mensagens.MSG02.name()
-                    )
-            );
+            throw new AplicacaoException(MensagemResourceBundle.get().getMensagem(Mensagens.MSG02.name()));
         }
         List<Aluno> alunos = getAlunoDao().listar();
         for (Aluno alunoBanco : alunos) {
-            if (alunoBanco.getNome().toUpperCase().equals(
-                    aluno.getNome().toUpperCase().trim())) {
-                throw new AplicacaoException(
-                        MensagemResourceBundle
-                        .get()
-                        .getMensagem(
-                                Mensagens.MSG01.name()
-                        )
-                );
+            if (alunoBanco.getNome().toUpperCase().equals(aluno.getNome().toUpperCase().trim())) {
+                throw new AplicacaoException(MensagemResourceBundle.get().getMensagem(Mensagens.MSG01.name()));
             }
         }
     }
+  
+    @RolesAllowed("super-user")
+    @Logged
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public String ola(String nome) {
+        AplicacaoLogger.getLogger(getClass()).info("Ola ".concat(nome));
+        return "Ola ".concat(nome);
+    }
 
+    @RolesAllowed("super-user")
     @Logged
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)

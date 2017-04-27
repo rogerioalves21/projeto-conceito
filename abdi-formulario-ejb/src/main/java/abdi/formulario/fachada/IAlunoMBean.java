@@ -13,6 +13,8 @@ import javax.ejb.Remote;
 @Remote
 public interface IAlunoMBean extends IAplicacaoMBean {
 
+    String ola(String nome);
+
     List<Aluno> listar();
 
     void incluir(Aluno aluno) throws AplicacaoException;

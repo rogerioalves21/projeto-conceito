@@ -29,7 +29,7 @@ public class ListarAlunosResource {
     public List<Aluno> listar() {
         try {
             AplicacaoServiceLocator locator = new AplicacaoServiceLocator();
-            IRestServico restServico = locator.localizarRest("rest:http://localhost:8080::/abdi-formulario-web/escola/auditoria");
+            IRestServico restServico = locator.localizarRest("rest:http://localhost:8080::/abdi-formulario-web/escola/auditorias");
             RequisicaoRestDTO requisicao = new RequisicaoRestDTO();
             restServico.consumir(requisicao, List.class);
         } catch (LocalizarObjetoException excecao) {

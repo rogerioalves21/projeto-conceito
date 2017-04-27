@@ -4,10 +4,10 @@
              version="2.0">
     <persistence-unit name="abdi.formulario">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <jta-data-source>java:/jboss/datasources/EstudoDS</jta-data-source>
+        <jta-data-source>java:/jboss/datasources/ExampleDS</jta-data-source>
         <class>abdi.formulario.entidades.Aluno</class>
         <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
         </properties>

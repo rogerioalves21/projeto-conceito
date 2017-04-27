@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="loginApp">
     <head>
         <title>Escola</title>
         <meta charset="iso-8859-1" />
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <!-- Or use TAG number for specific version. New versions are auto deployed -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->
@@ -13,7 +14,12 @@
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+        <script>
+          angular.module('loginApp', []);
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-fixed-top navbar-inverse">
@@ -25,7 +31,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Cadastro de Alunos e Matérias</a>
+                    <a class="navbar-brand" href="#">Cadastro de Alunos e MatÃ©rias</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
 
@@ -38,25 +44,34 @@
             </div>
 
             <div class="page-header">
-                <h4>Login</h4>
+                <h5>Login</h5>
             </div>
 
-            <div class="container">
+            <!--div class="container"-->
                 <div style="width: 350px;">
-                    <form action="j_security_check" method="post">
+                    <form action="j_security_check" method="post" class="bs-example bs-example-form" data-example-id=simple-input-groups>
                         <input type="hidden" name="to" value="abdi-formulario-web/login-servlet.java">
-                        <div class="form-group">
-                            <label for="j_username" class="col-2 col-form-label">Usuário</label>
-                            <input class="form-control" placeholder="digite o login" id="login" name= "j_username" type="text"/>
+                        <div class="form-group input-group-sm">
+                          <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="..."><i class="fa fa-user fa-fw"></i></span>
+                            <input aria-label="..." ng-model="loginInput" class="form-control" placeholder="digite o login" style="width: 180px" id="login" name= "j_username" type="text"/>
+                          </div>
+                          <br>
+                          
+                          <div class="input-group input-group-sm">
+                              <span class="input-group-addon" id=".."><i class="fa fa-key fa-fw"></i></span>
+                              <input aria-label=".." class="form-control" type="password" id="senha" style="width: 180px" name= "j_password"/>
+                          </div>
+                          <br>
+                          
+                          <div class="input-group">
+                            <span class="input-group-addon" id="...."><i class="fa fa-key fa-fw"></i></span>
+                            <input type="submit" aria-label="...." name="botao" value="Entrar" class="btn btn-sm btn-primary"/>
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <label for="j_password" class="col-2 col-form-label">Senha</label>
-                            <input class="form-control" type="password" id="senha" style="width: 120px" name= "j_password"/>
-                        </div>
-                        <input type="submit" name="botao" value="Entrar" class="btn btn-sm btn-primary"/>
                     </form>
-                </div>
-            </div>
+                </div>{{loginInput}}
+            <!--/div-->
         </div>
     </body>
 </html>

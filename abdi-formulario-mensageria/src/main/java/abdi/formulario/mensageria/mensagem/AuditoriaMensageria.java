@@ -31,7 +31,7 @@ public class AuditoriaMensageria implements Serializable {
      * @param mensagem Mensagem a ser enviada.
      */
     public void enviarMensagem(MensagemAuditoria mensagem) {
-        try {
+        /*try {
             Context ctx = new InitialContext();
             connectionFactory = (ConnectionFactory)ctx.lookup("java:/AutidoriaConnectionFactory");
             destination = (Destination)ctx.lookup("java:/jms/queue/Auditoria");
@@ -46,6 +46,7 @@ public class AuditoriaMensageria implements Serializable {
         } catch (NamingException | JMSException ex) {
             Logger.getLogger(AuditoriaMensageria.class.getName()).log(Level.SEVERE, null, ex);
         }
+        */
     }
 
     public MensagemAuditoria criarMensagem(String descricao) {

@@ -16,12 +16,14 @@ import javax.jms.ObjectMessage;
  *
  * @author Rogerio.Rodrigues
  */
+/*
 @MessageDriven(name = "Auditoria", activationConfig = {
     @ActivationConfigProperty(
             propertyName = "destination",
             propertyValue = "java:/jms/queue/Auditoria"
     )
-})
+    
+})*/
 public class AuditoriaConsumer implements MessageListener {
 
     @Inject
