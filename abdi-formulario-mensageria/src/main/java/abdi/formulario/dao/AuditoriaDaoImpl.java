@@ -19,10 +19,10 @@ import org.bson.Document;
  */
 public class AuditoriaDaoImpl extends AplicacaoDaoImpl implements AuditoriaDao {
 
-    private static final String LOGIN        = "login";
-    private static final String DATAHORA     = "dataHora";
+    private static final String LOGIN = "login";
+    private static final String DATAHORA = "dataHora";
     private static final String DATABASENAME = "aplicacaoConceito";
-    private static final String AUDITORIA    = "auditoria";
+    private static final String AUDITORIA = "auditoria";
 
     @Override
     public void incluir(MensagemAuditoria mensagem) {
@@ -58,8 +58,10 @@ public class AuditoriaDaoImpl extends AplicacaoDaoImpl implements AuditoriaDao {
             MongoCursor<Document> cursor = auditorias.find().iterator();
             while (cursor.hasNext()) {
                 Document documento = cursor.next();
+                String login = documento.getString("login");
+                String dataHora = documento.getString("dataHora");
                 MensagemAuditoria mensagem = new MensagemAuditoria();
-                mensagem.setConteudo(documento.toJson());
+                mensagem.setConteudo(new String("{\"login\":" + "\"" + login + "\", \"dataHora\": " + "\"" + dataHora + "\"}"));
                 lista.add(mensagem);
             }
             cursor.close();
