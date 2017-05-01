@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MensagemResourceBundle.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">abdi-formulario-comum</a> &gt; <a href="index.source.html" class="el_package">abdi.formulario.mensagens</a> &gt; <span class="el_source">MensagemResourceBundle.java</span></div><h1>MensagemResourceBundle.java</h1><pre class="source lang-java linenums">package abdi.formulario.mensagens;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import abdi.formulario.log.AplicacaoLogger;
+
+/**
+ * Classe responsável por obter as mensagens do sistema.
+ * 
+ * @author Rogerio.Rodrigues
+ */
+public class MensagemResourceBundle {
+
+<span class="nc" id="L16">    private static final MensagemResourceBundle INSTANCIA = new MensagemResourceBundle();</span>
+    private static final String                        ARQUIVO   = &quot;mensagens.properties&quot;;
+<span class="nc" id="L18">    private static final Properties                    PROP      = new Properties();</span>
+    private static final String                 ERRO      = &quot;Erro ao carregar o arquivo de mensagens&quot;;
+
+    /**
+     * Singleton.
+     */
+<span class="nc" id="L24">    MensagemResourceBundle() {</span>
+<span class="nc" id="L25">    }</span>
+    
+    /**
+     * Retorna a instância.
+     * 
+     * @return {@code MensagemResourceBundle}.
+     */
+    public static MensagemResourceBundle get() {
+<span class="nc" id="L33">        return INSTANCIA;</span>
+    }
+
+    public void carregarArquivo() {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (PROP.isEmpty()) {</span>
+<span class="nc" id="L38">            InputStream input = getClass().getClassLoader().getResourceAsStream(ARQUIVO);</span>
+            try {
+<span class="nc" id="L40">                PROP.load(input);</span>
+<span class="nc" id="L41">            } catch (IOException excecao) {</span>
+<span class="nc" id="L42">                AplicacaoLogger.getLogger(getClass()).error(ERRO, excecao);</span>
+<span class="nc" id="L43">                throw new RuntimeException(ERRO);</span>
+<span class="nc" id="L44">            }</span>
+        }
+<span class="nc" id="L46">    }</span>
+
+    public String getMensagem(String chave) {
+<span class="nc" id="L49">        carregarArquivo();</span>
+<span class="nc" id="L50">        return this.PROP.getProperty(chave);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

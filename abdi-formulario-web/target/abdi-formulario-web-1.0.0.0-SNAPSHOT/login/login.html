@@ -19,65 +19,66 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
         <script>
             var loginApp = angular.module("loginApp", []);
-            var loginController = loginApp.controller("LoginController", ["$scope", function($scope) {
-                $scope.user = {
-                  login : "rogerio.alves.rodrigues",
-                  password : ""
-                };
+            loginApp.controller("LoginController", ["$scope", function($scope) {
+                $scope.user;
+                $scope.logar = function() {
+                  window.alert("adf");
+                }
             }]);          
         </script>
     </head>
     <body>
-        <nav class="navbar navbar-fixed-top navbar-inverse">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Cadastro de Alunos e Matérias</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-
-                </div>
-            </div>
-        </nav>
         <div class="container">
-            <div class="page-header">
-
-            </div>
-
-            <div class="page-header">
-                <h5>Login</h5>
-            </div>
-
-            <!--div class="container"-->
+          <nav class="navbar navbar-fixed-top navbar-inverse">
+              <div class="container">
+                  <div class="navbar-header">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                      </button>
+                      <a class="navbar-brand" href="#">Cadastro de Alunos e Materias</a>
+                  </div>
+                  <div id="navbar" class="navbar-collapse collapse">
+  
+                  </div>
+              </div>
+          </nav>
+        </div>
+        <div class="page-header"></div>
+        <div class="container" role="main">
                 <div style="width: 350px;">
-                    <form action="j_security_check" method="post" class="bs-example bs-example-form" ng-controller="LoginController">
-                        <input type="hidden" name="to" value="abdi-formulario-web/login-servlet.java">
-                        <div class="form-group input-group-sm">
-                          <div class="input-group input-group-sm">
-                            <span class="input-group-addon" id="..."><i class="fa fa-user fa-fw"></i></span>
-                            <input aria-label="..." ng-model="user.login" class="form-control" placeholder="digite o login" style="width: 180px" id="login" name= "j_username" type="text"/>
+                    <form action="j_security_check" method="post" name="myForm" ng-submit="logar()"
+                    class="bs-example bs-example-form" ng-controller="LoginController">
+                        <div class="form-group">
+                          <div class="input-group">
+                              <h5>Login</h5>
                           </div>
-                          <br>
-                          
-                          <div class="input-group input-group-sm">
-                              <span class="input-group-addon" id=".."><i class="fa fa-key fa-fw"></i></span>
-                              <input aria-label=".." class="form-control" ng-model="user.password" type="password" id="senha" style="width: 180px" name= "j_password"/>
+                          <div class="input-group">
+                            <span class="input-group-addon" id="..."><i class="fa fa-user fa-fw"></i></span>
+                            <input aria-label="..." ng-model="user.login" class="form-control" required
+                            ng-maxlength="40"
+                            style="width: 160px" id="login" name= "j_username" type="text"/>
                           </div>
                           <br>
                           
                           <div class="input-group">
-                            <input type="submit" name="botao" value="Entrar" class="btn btn-sm btn-primary"/>
+                              <span class="input-group-addon" id=".."><i class="fa fa-key fa-fw"></i></span>
+                              <input aria-label=".." ng-maxlength="40" required
+                              class="form-control" ng-model="user.password" type="password" id="senha" style="width: 160px" name= "j_password"/>
                           </div>
+                          <br>
+                          
+                          <div class="input-group">
+                            <button type="submit" name="botao" class="btn btn-sm btn-primary">
+                            <i class="fa fa-power-off fa-fw"></i> Entrar
+                            </button>
+                          </div>
+                          
                         </div>
-                        {{user | json}}
                     </form>
                 </div>
-            <!--/div-->
         </div>
     </body>
 </html>
