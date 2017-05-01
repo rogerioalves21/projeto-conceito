@@ -21,9 +21,11 @@
             var loginApp = angular.module("loginApp", []);
             loginApp.controller("LoginController", ["$scope", function($scope) {
                 $scope.user;
-                $scope.logar = function() {
-                  window.alert("adf");
-                }
+                
+                $scope.error = function(name) {
+                  var s = $scope.myForm[name];
+                  return s.$invalid && s.$dirty ? "error" : "";
+                };
             }]);          
         </script>
     </head>
@@ -48,30 +50,34 @@
         </div>
         <div class="page-header"></div>
         <div class="container" role="main">
-                <div style="width: 350px;">
+                <div style="width: 350px;" ng-controller="LoginController">
                     <form action="j_security_check" method="post" name="myForm" ng-submit="logar()"
-                    class="bs-example bs-example-form" ng-controller="LoginController">
+                    class="bs-example bs-example-form" >
                         <div class="form-group">
                           <div class="input-group">
                               <h5>Login</h5>
                           </div>
-                          <div class="input-group">
+                          <div class="input-group" ng-class="error('j_username')">
                             <span class="input-group-addon" id="..."><i class="fa fa-user fa-fw"></i></span>
                             <input aria-label="..." ng-model="user.login" class="form-control" required
                             ng-maxlength="40"
-                            style="width: 160px" id="login" name= "j_username" type="text"/>
+                            style="width: 160px" id="j_username" name= "j_username" type="text"/>
+                            <span class="help-block"
+                              ng-show="myForm.j_username.$invalid && myForm.j_username.$dirty">
+                              Login is required
+                            </span>
                           </div>
                           <br>
                           
                           <div class="input-group">
                               <span class="input-group-addon" id=".."><i class="fa fa-key fa-fw"></i></span>
                               <input aria-label=".." ng-maxlength="40" required
-                              class="form-control" ng-model="user.password" type="password" id="senha" style="width: 160px" name= "j_password"/>
+                              class="form-control" ng-model="user.password" type="password" id="j_password" style="width: 160px" name= "j_password"/>
                           </div>
                           <br>
                           
                           <div class="input-group">
-                            <button type="submit" name="botao" class="btn btn-sm btn-primary">
+                            <button ng-disabled="myForm.$invalid" type="submit" name="botao" class="btn btn-sm btn-primary">
                             <i class="fa fa-power-off fa-fw"></i> Entrar
                             </button>
                           </div>

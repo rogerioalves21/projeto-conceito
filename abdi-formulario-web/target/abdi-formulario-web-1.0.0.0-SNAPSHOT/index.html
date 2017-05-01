@@ -5,6 +5,8 @@
         <meta charset="iso-8859-1" />
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <!-- Or use TAG number for specific version. New versions are auto deployed -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.min.js"></script>
+        <!-- Or use TAG number for specific version. New versions are auto deployed -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -15,9 +17,21 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script>
-            var conteudoApp = angular.module("conteudoApp", []);
-            conteudoApp.controller("ConteudoController", ["$scope", "$http", function ($scope, $http) {
+            var conteudoApp = angular.module("conteudoApp", ["ngResource"]);
+            
+            conteudoApp.factory("Conteudo", function($resource) {
+              
+              return $resource("http://localhost:8080/abdi-formulario-web/escola/auditoria/");
+              
+            });
+            
+            conteudoApp.controller("ConteudoController", ["$scope", "$http", "Conteudo", function ($scope, $http, Conteudo) {
                     $scope.mongoItems = [];
+
+                    Conteudo.query(function(data) {
+                      $scope.mongoItems = data;
+                    });
+                    /*
                     $http({
                         method: 'GET',
                         url: 'http://localhost:8080/abdi-formulario-web/escola/auditoria'
@@ -26,6 +40,7 @@
                     }, function errorCallback(response) {
                         console.log(response);
                     });
+                    */
                 }]);
         </script>
     </head>
