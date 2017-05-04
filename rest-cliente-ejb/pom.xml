@@ -8,12 +8,12 @@
     <packaging>ejb</packaging>
 
     <name>rest-cliente-ejb</name>
-
+    <!--
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    -->
     <dependencies>
     <dependency>
   <groupId>com.owlike</groupId>
