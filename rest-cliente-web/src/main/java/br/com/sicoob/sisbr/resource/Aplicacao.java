@@ -1,6 +1,7 @@
 package br.com.sicoob.sisbr.resource;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.ws.rs.ApplicationPath;

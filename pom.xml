@@ -13,5 +13,9 @@
         <module>abdi-formulario-jaas</module>
         <module>abdi-formulario-mensageria</module>
         <module>abdi-formulario-comum</module>
+        
+        <module>rest-cliente-ejb</module>
+        <module>rest-cliente-web</module>
+        <module>rest-cliente-ear</module>
     </modules>
 </project>

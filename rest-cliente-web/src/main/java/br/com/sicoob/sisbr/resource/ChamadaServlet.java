@@ -5,12 +5,14 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.sicoob.sisbr.cliente.SicoobRestServico;
+import br.com.sicoob.sisbr.ejb.IRestClientServico;
+import br.com.sicoob.sisbr.ejb.MeuNome;
 
 public class ChamadaServlet extends HttpServlet {
 
@@ -20,12 +22,15 @@ public class ChamadaServlet extends HttpServlet {
 
         String message = "teste";
         try {
-            SicoobRestServico servico = new SicoobRestServico();
+            InitialContext context = new InitialContext();
             MeuNome nome = new MeuNome();
             nome.setNome("Rogerio");
+            IRestClientServico servico = (IRestClientServico)context.lookup("restcliente/RestClientServicoEJB");
+            System.out.println("EJB: " + servico);
             message = servico.consumir(nome);
         } catch (Exception excecao) {
-            Logger.getLogger(ChamadaServlet.class.getName()).log(Level.SEVERE, "Erro ao consumir o servico");
+            excecao.printStackTrace();
+            Logger.getLogger(ChamadaServlet.class.getName()).log(Level.SEVERE, "Erro ao consumir o servico", excecao);
             message = excecao.getMessage();
         }
 
